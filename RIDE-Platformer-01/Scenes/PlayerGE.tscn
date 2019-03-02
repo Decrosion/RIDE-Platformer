@@ -1,0 +1,211 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scripts/PlayerGE.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/idle-00.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Sprite_Run_00.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Sprite_Run_01.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Sprite_Run_02.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Sprite_Run_03.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Sprite_Run_04.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/slide-00.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/attack-00.png" type="Texture" id=9]
+[ext_resource path="res://Backgrounds/4. back-00.png" type="Texture" id=10]
+[ext_resource path="res://Backgrounds/3. mid 2-00.png" type="Texture" id=11]
+[ext_resource path="res://Backgrounds/2. mid-00.png" type="Texture" id=12]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Run",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Slide",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "Crouch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 11, 29 )
+
+[node name="Player" type="KinematicBody2D" index="0"]
+
+position = Vector2( 272.121, 229.863 )
+z_index = 1
+input_pickable = false
+collision_layer = 0
+collision_mask = 1
+collision/safe_margin = 0.01
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( 17.3405, -32 )
+frames = SubResource( 1 )
+animation = "Idle"
+playing = true
+offset = Vector2( -8, 0 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 9, -13 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+position = Vector2( 144, 40 )
+offset = Vector2( -96, -64 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_top = -960
+limit_right = 5400
+limit_bottom = 960
+limit_smoothed = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.4
+drag_margin_bottom = 0.4
+editor_draw_screen = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+_sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Offset", "Smoothing", "Transform" ]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D" index="0"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( 0, 0 )
+scroll_limit_end = Vector2( 0, 0 )
+scroll_ignore_camera_zoom = false
+_sections_unfolded = [ "Scroll" ]
+
+[node name="Layer 3" type="ParallaxLayer" parent="Camera2D/ParallaxBackground" index="0"]
+
+position = Vector2( -240, -135 )
+motion_scale = Vector2( 0.01, 0 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 480, 270 )
+_sections_unfolded = [ "Material", "Motion", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Jungle Sky Background" type="Sprite" parent="Camera2D/ParallaxBackground/Layer 3" index="0"]
+
+texture = ExtResource( 10 )
+centered = false
+_sections_unfolded = [ "Animation", "Material", "Offset", "Pause", "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="Layer 2" type="ParallaxLayer" parent="Camera2D/ParallaxBackground" index="1"]
+
+position = Vector2( -240, -135 )
+motion_scale = Vector2( 0.03, 0.03 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 960, 540 )
+_sections_unfolded = [ "Material", "Motion", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Jungle Mid 2" type="Sprite" parent="Camera2D/ParallaxBackground/Layer 2" index="0"]
+
+texture = ExtResource( 11 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Layer 1" type="ParallaxLayer" parent="Camera2D/ParallaxBackground" index="2"]
+
+position = Vector2( -240, -135 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 960, 540 )
+_sections_unfolded = [ "Material", "Motion", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Jungle Mid 1" type="Sprite" parent="Camera2D/ParallaxBackground/Layer 1" index="0"]
+
+texture = ExtResource( 12 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Kittens" type="Node" parent="." index="3"]
+
+editor/display_folded = true
+
+[node name="Ginger" type="Node" parent="Kittens" index="0"]
+
+[node name="Tabby" type="Node" parent="Kittens" index="1"]
+
+[node name="Monster" type="Node" parent="Kittens" index="2"]
+
+[node name="Rayman" type="Node" parent="." index="4"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Rayman" index="0"]
+
+position = Vector2( 272, 245 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 2 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="RayCast2D2" type="RayCast2D" parent="Rayman" index="1"]
+
+position = Vector2( 281, 245 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 2 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="RayCast2D3" type="RayCast2D" parent="Rayman" index="2"]
+
+position = Vector2( 289.831, 245 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 0, 2 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+
